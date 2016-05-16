@@ -4,12 +4,15 @@
     var TypeNumberImitate;
     window.TypeNumberImitate = TypeNumberImitate = function () {
         function TypeNumberImitate($input) {
-            this.$input = $input;
-            this.init();
+            this.$input = jQuery($input);
+            if (!this.alreadyImitated()) {
+                this.init();
+                this.toggleDisabled();
+            }
         }
         TypeNumberImitate.prototype.isValid = function (val) {
             var parsed, result;
-            if (!(this.min || this.max)) {
+            if (val === '' || !(this.min != null || this.max != null)) {
                 return true;
             }
             parsed = this.parseFn(val);
@@ -22,19 +25,31 @@
             }
             return !!result;
         };
+        TypeNumberImitate.prototype.toggleDisabled = function () {
+            var val;
+            val = this.$input.val();
+            this.$plus.toggleClass('disabled', val === this.max);
+            return this.$minus.toggleClass('disabled', val === this.min);
+        };
         TypeNumberImitate.prototype.stepFn = function (val) {
             var newVal, oldVal;
-            oldVal = this.parseFn(this.$input.val());
+            oldVal = this.$input.val();
+            if (oldVal === '') {
+                oldVal = 0;
+            }
+            oldVal = this.parseFn(oldVal);
             newVal = oldVal + this.parseFn(val);
             if (this.isValid(newVal)) {
                 this.$input.val(newVal);
-                this.$plus.toggleClass('disabled', newVal === this.max);
-                this.$minus.toggleClass('disabled', newVal === this.min);
+                this.toggleDisabled();
                 this.$input.trigger('change');
                 return newVal;
             } else {
                 return oldVal;
             }
+        };
+        TypeNumberImitate.prototype.alreadyImitated = function () {
+            return this.$input.data().typeNumberImitated;
         };
         TypeNumberImitate.prototype.increment = function () {
             return this.stepFn(this.step);
@@ -45,7 +60,8 @@
         TypeNumberImitate.prototype.init = function () {
             this.initAttrs();
             this.initWrap();
-            return this.initHandlers();
+            this.initHandlers();
+            return this.$input.data('type-number-imitated', true);
         };
         TypeNumberImitate.prototype.initAttrs = function () {
             var max, min, regexStr;
@@ -116,5 +132,4 @@
         };
         return TypeNumberImitate;
     }();
-    new TypeNumberImitate($('input'));
 }.call(this));

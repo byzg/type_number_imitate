@@ -1,28 +1,40 @@
 # created by byzg
 # https://github.com/byzg/type_number_imitate
 window.TypeNumberImitate = class TypeNumberImitate
-  constructor: (@$input) ->
-    @init()
+  constructor: ($input) ->
+    @$input = jQuery($input)
+    unless @alreadyImitated()
+      @init()
+      @toggleDisabled()
 
   isValid: (val)->
-    return true unless @min || @max
+    return true if val == '' || !(@min? || @max?)
     parsed = @parseFn(val);
     result = !isNaN(parsed) && !!('' + val).match(@regex)
     result &= (parsed >= @min) if @min
     result &= (parsed <= @max) if @max
     !!result
 
+  toggleDisabled: ->
+    val = @$input.val()
+    @$plus.toggleClass 'disabled', val == @max
+    @$minus.toggleClass 'disabled', val == @min
+
   stepFn: (val)->
-    oldVal = @parseFn(@$input.val())
+    oldVal = @$input.val()
+    oldVal = 0 if oldVal == ''
+    oldVal = @parseFn(oldVal)
     newVal = oldVal + @parseFn(val)
     if @isValid(newVal)
       @$input.val newVal
-      @$plus.toggleClass 'disabled', newVal == @max
-      @$minus.toggleClass 'disabled', newVal == @min
+      @toggleDisabled()
       @$input.trigger 'change'
       newVal
     else
       oldVal
+
+  alreadyImitated: ->
+    @$input.data().typeNumberImitated
 
   increment: ->
     @stepFn(@step)
@@ -34,6 +46,7 @@ window.TypeNumberImitate = class TypeNumberImitate
     @initAttrs()
     @initWrap()
     @initHandlers()
+    @$input.data('type-number-imitated', true)
 
   initAttrs: ->
     @float = @$input.is('[float]')
