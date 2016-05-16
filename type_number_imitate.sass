@@ -1,0 +1,55 @@
+$black-russian: #141415
+$zircon: #F4F5F5
+$grey-chateau: #95989D
+$athens-grey: #D5D6D8
+$chantilly: #EDC5D8
+=no-select
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+.type-number-initate
+  width: 60px
+  height: 30px
+  position: relative
+  input
+    box-sizing: border-box
+    width: 44px
+    padding: 0 10px
+    vertical-align: top
+    text-align: left
+    outline: none
+    border-radius: 3px 0 0 3px
+    border: 1px solid $chantilly
+    height: 30px
+    +no-select
+    border-right: none
+    color: $black-russian
+  .minus, .plus
+    +no-select
+    display: block
+    width: 16px
+    height: 15px
+    line-height: 13px
+    background: $zircon
+    border: 1px solid $chantilly
+    color: $grey-chateau
+    text-align: center
+    font-family: none
+    font-weight: bold
+    cursor: pointer
+    position: absolute
+    right: 0
+    &:active
+      background: #ddd
+    &.disabled
+      pointer-events: none
+      color: $athens-grey
+  .minus
+    border-radius: 0 0 3px 0
+    bottom: 0
+  .plus
+    border-radius: 0 3px 0 0
+    top: 0

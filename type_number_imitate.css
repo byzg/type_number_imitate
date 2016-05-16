@@ -1,0 +1,60 @@
+.type-number-initate {
+  width: 60px;
+  height: 30px;
+  position: relative;
+}
+.type-number-initate input {
+  box-sizing: border-box;
+  width: 44px;
+  padding: 0 10px;
+  vertical-align: top;
+  text-align: left;
+  outline: none;
+  border-radius: 3px 0 0 3px;
+  border: 1px solid #EDC5D8;
+  height: 30px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-right: none;
+  color: #141415;
+}
+.type-number-initate .minus, .type-number-initate .plus {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+  width: 16px;
+  height: 15px;
+  line-height: 13px;
+  background: #F4F5F5;
+  border: 1px solid #EDC5D8;
+  color: #95989D;
+  text-align: center;
+  font-family: none;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+.type-number-initate .minus:active, .type-number-initate .plus:active {
+  background: #ddd;
+}
+.type-number-initate .minus.disabled, .type-number-initate .plus.disabled {
+  pointer-events: none;
+  color: #D5D6D8;
+}
+.type-number-initate .minus {
+  border-radius: 0 0 3px 0;
+  bottom: 0;
+}
+.type-number-initate .plus {
+  border-radius: 0 3px 0 0;
+  top: 0;
+}
