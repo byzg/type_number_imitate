@@ -1,3 +1,5 @@
+// created by byzg
+// https://github.com/byzg/type_number_imitate
 (function () {
     var TypeNumberInitate;
     window.TypeNumberInitate = TypeNumberInitate = function () {

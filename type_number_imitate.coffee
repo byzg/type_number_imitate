@@ -1,3 +1,5 @@
+# created by byzg
+# https://github.com/byzg/type_number_imitate
 window.TypeNumberInitate = class TypeNumberInitate
   constructor: (@$input) ->
     @init()
