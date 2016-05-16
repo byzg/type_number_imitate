@@ -7,3 +7,5 @@ Attributes `step` (default 1), `min`, `max` are supported.
 Use attribute `float` (default false) to allow float typing.
 
 Handlers on keyboard up (↑) and down (↓) changes value of input on step
+
+[Live demo](http://codepen.io/byzg/pen/VaNPMO)
