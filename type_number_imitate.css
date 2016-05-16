@@ -1,9 +1,9 @@
-.type-number-initate {
+.type-number-imitate {
   width: 60px;
   height: 30px;
   position: relative;
 }
-.type-number-initate input {
+.type-number-imitate input {
   box-sizing: border-box;
   width: 44px;
   padding: 0 10px;
@@ -22,7 +22,7 @@
   border-right: none;
   color: #141415;
 }
-.type-number-initate .minus, .type-number-initate .plus {
+.type-number-imitate .minus, .type-number-imitate .plus {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -43,18 +43,18 @@
   position: absolute;
   right: 0;
 }
-.type-number-initate .minus:active, .type-number-initate .plus:active {
+.type-number-imitate .minus:active, .type-number-imitate .plus:active {
   background: #ddd;
 }
-.type-number-initate .minus.disabled, .type-number-initate .plus.disabled {
+.type-number-imitate .minus.disabled, .type-number-imitate .plus.disabled {
   pointer-events: none;
   color: #D5D6D8;
 }
-.type-number-initate .minus {
+.type-number-imitate .minus {
   border-radius: 0 0 3px 0;
   bottom: 0;
 }
-.type-number-initate .plus {
+.type-number-imitate .plus {
   border-radius: 0 3px 0 0;
   top: 0;
 }

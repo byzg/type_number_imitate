@@ -1,6 +1,6 @@
 # created by byzg
 # https://github.com/byzg/type_number_imitate
-window.TypeNumberInitate = class TypeNumberInitate
+window.TypeNumberImitate = class TypeNumberImitate
   constructor: (@$input) ->
     @init()
 
@@ -61,7 +61,7 @@ window.TypeNumberInitate = class TypeNumberInitate
     @$minus.click => @decrement()
 
   initWrap: ->
-    @$input.wrap('<div class="type-number-initate"></div>')
+    @$input.wrap('<div class="type-number-imitate"></div>')
     @$container = @$input.parent()
     @$plus = jQuery('<span class="plus">+</span>')
     @$minus = jQuery('<span class="minus">–</span>')

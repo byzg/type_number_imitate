@@ -1,13 +1,13 @@
 // created by byzg
 // https://github.com/byzg/type_number_imitate
 (function () {
-    var TypeNumberInitate;
-    window.TypeNumberInitate = TypeNumberInitate = function () {
-        function TypeNumberInitate($input) {
+    var TypeNumberImitate;
+    window.TypeNumberImitate = TypeNumberImitate = function () {
+        function TypeNumberImitate($input) {
             this.$input = $input;
             this.init();
         }
-        TypeNumberInitate.prototype.isValid = function (val) {
+        TypeNumberImitate.prototype.isValid = function (val) {
             var parsed, result;
             if (!(this.min || this.max)) {
                 return true;
@@ -22,7 +22,7 @@
             }
             return !!result;
         };
-        TypeNumberInitate.prototype.stepFn = function (val) {
+        TypeNumberImitate.prototype.stepFn = function (val) {
             var newVal, oldVal;
             oldVal = this.parseFn(this.$input.val());
             newVal = oldVal + this.parseFn(val);
@@ -36,18 +36,18 @@
                 return oldVal;
             }
         };
-        TypeNumberInitate.prototype.increment = function () {
+        TypeNumberImitate.prototype.increment = function () {
             return this.stepFn(this.step);
         };
-        TypeNumberInitate.prototype.decrement = function () {
+        TypeNumberImitate.prototype.decrement = function () {
             return this.stepFn(-this.step);
         };
-        TypeNumberInitate.prototype.init = function () {
+        TypeNumberImitate.prototype.init = function () {
             this.initAttrs();
             this.initWrap();
             return this.initHandlers();
         };
-        TypeNumberInitate.prototype.initAttrs = function () {
+        TypeNumberImitate.prototype.initAttrs = function () {
             var max, min, regexStr;
             this.float = this.$input.is('[float]');
             this.parseFn = this.float ? parseFloat : parseInt;
@@ -66,7 +66,7 @@
             regexStr = regexStr.replace(/[.]/g, '\\$&');
             return this.regex = new RegExp(regexStr, 'g');
         };
-        TypeNumberInitate.prototype.initHandlers = function () {
+        TypeNumberImitate.prototype.initHandlers = function () {
             this.$input.keypress(function (_this) {
                 return function (e) {
                     return _this.isValid(_this.$input.val() + String.fromCharCode(e.charCode));
@@ -106,15 +106,15 @@
                 };
             }(this));
         };
-        TypeNumberInitate.prototype.initWrap = function () {
-            this.$input.wrap('<div class="type-number-initate"></div>');
+        TypeNumberImitate.prototype.initWrap = function () {
+            this.$input.wrap('<div class="type-number-imitate"></div>');
             this.$container = this.$input.parent();
             this.$plus = jQuery('<span class="plus">+</span>');
             this.$minus = jQuery('<span class="minus">\u2013</span>');
             this.$container.append(this.$plus);
             return this.$container.append(this.$minus);
         };
-        return TypeNumberInitate;
+        return TypeNumberImitate;
     }();
-    new TypeNumberInitate($('input'));
+    new TypeNumberImitate($('input'));
 }.call(this));
