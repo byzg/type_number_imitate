@@ -1,4 +1,6 @@
-JS-library to imitate `input[type='number']` for `input[type='text']`
+jQuery-library to imitate `input[type='number']` for `input[type='text']`
+
+WARNING: jQuery and [Lodash](https://lodash.com/docs) required.
 
 Attributes `step` (default 1), `min`, `max` are supported.
 
