@@ -5,7 +5,7 @@
     window.TypeNumberImitate = TypeNumberImitate = function () {
         function TypeNumberImitate($input) {
             this.$input = jQuery($input);
-            if (!this.alreadyImitated()) {
+            if (this.$input.length && !this.alreadyImitated()) {
                 this.init();
                 this.toggleDisabled();
             }

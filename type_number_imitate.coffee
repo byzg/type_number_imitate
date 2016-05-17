@@ -3,7 +3,7 @@
 window.TypeNumberImitate = class TypeNumberImitate
   constructor: ($input) ->
     @$input = jQuery($input)
-    unless @alreadyImitated()
+    if @$input.length && !@alreadyImitated()
       @init()
       @toggleDisabled()
 
