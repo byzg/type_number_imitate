@@ -1,3 +1,15 @@
-input type='text' min='1' placeholder='1' float=true value=2 max='8' step=3
+style
+  | .green-border { border: solid 3px green; }
+  | .large { zoom: 1.2; }
+
+| Default input:
+input.first type='text' min='1' placeholder='1' float=true
+br
+| Input with classes of wrapper:
+input.second type='text' min='1' placeholder='1' float=true
+
 script
-  | new TypeNumberImitate(jQuery('input'));
+  | jQuery(function() {
+  |    new TypeNumberImitate('input.first');
+  |    new TypeNumberImitate('input.second', {wrapperClasses: 'green-border large'});
+  | });

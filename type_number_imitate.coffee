@@ -1,8 +1,14 @@
 # created by byzg
 # https://github.com/byzg/type_number_imitate
+# created by byzg
+# https://github.com/byzg/type_number_imitate
 window.TypeNumberImitate = class TypeNumberImitate
-  constructor: ($input) ->
+  constructor: ($input, opts = {}) ->
     @$input = jQuery($input)
+    @opts = opts
+    @opts.wrapperClasses ||= ''
+    @opts.plusClasses ||= ''
+    @opts.minusClasses ||= ''
     if @$input.length && !@alreadyImitated()
       @init()
       @toggleDisabled()
@@ -14,6 +20,15 @@ window.TypeNumberImitate = class TypeNumberImitate
     result &= (parsed >= @min) if @min
     result &= (parsed <= @max) if @max
     !!result
+
+  valAfterType: (typedStr, keyDownCode = null)->
+    currentVal = @$input.val()
+    selectionStart = @$input.get(0).selectionStart
+    selectionEnd = @$input.get(0).selectionEnd
+    deltaStart = deltaEnd = 0
+    deltaStart = -1 if keyDownCode == 8
+    deltaEnd = 1 if keyDownCode == 46
+    currentVal.substr(0, selectionStart + deltaStart) + typedStr + currentVal.substr(selectionEnd + deltaEnd)
 
   toggleDisabled: ->
     val = @$input.val()
@@ -61,22 +76,28 @@ window.TypeNumberImitate = class TypeNumberImitate
     @regex = new RegExp(regexStr, 'g')
 
   initHandlers: ->
-    @$input.keypress((e) =>
-      @isValid(@$input.val() + String.fromCharCode(e.charCode))
+    @$input.on('keypress', (e) =>
+      @isValid(@valAfterType(String.fromCharCode(e.charCode)))
     ).on('keydown', (e) =>
-      @increment() if e.keyCode == 38
-      @decrement() if e.keyCode == 40
-      e.preventDefault() if _.includes([38, 40], e.keyCode)
-    ).on 'paste', (e) =>
+      if _.includes([38, 40], e.keyCode)
+        @increment() if e.keyCode == 38
+        @decrement() if e.keyCode == 40
+        e.preventDefault()
+      else if _.includes([8, 46], e.keyCode)
+        e.preventDefault() unless @isValid(@valAfterType('', e.keyCode))
+    ).on('paste', (e) =>
       pasted = e.originalEvent.clipboardData.getData('text')
-      e.preventDefault() unless @isValid(@value + pasted)
+      e.preventDefault() unless @isValid(@valAfterType(pasted))
+    ).on('cut', (e) =>
+      e.preventDefault() unless @isValid(@valAfterType(''))
+    )
     @$plus.click => @increment()
     @$minus.click => @decrement()
 
   initWrap: ->
-    @$input.wrap('<div class="type-number-imitate"></div>')
+    @$input.wrap("<div class='type-number-imitate #{@opts.wrapperClasses}'></div>")
     @$container = @$input.parent()
-    @$plus = jQuery('<span class="plus">+</span>')
-    @$minus = jQuery('<span class="minus">–</span>')
+    @$plus = jQuery("<span class='plus #{@opts.plusClasses}'>+</span>")
+    @$minus = jQuery("<span class='minus #{@opts.minusClasses}'>–</span>")
     @$container.append(@$plus)
     @$container.append(@$minus)
