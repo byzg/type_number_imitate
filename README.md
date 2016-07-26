@@ -29,7 +29,7 @@ Or install it yourself as:
 ## Usage
 
 ```html
-<input class="first" float="" min="1" placeholder="1" type="text">
+<input class="first" float="" min="1" type="text">
 ```
 ```javascript
 new TypeNumberImitate('input.first');
@@ -48,10 +48,16 @@ Result:
 ```javascript
   new TypeNumberImitate(inputSelector, options);
 ```
-* *wrapperClasses* - additional clases for wrapper div.type-number-imitate
-* *plusClasses*, *minusClasses* - additional clases for plus and minus spans
+* *wrapperClasses* - additional classes for wrapper div.type-number-imitate
+* *plusClasses*, *minusClasses* - additional classes for plus and minus spans
+* *skipPlaceholder* - Use this attribute to clear placeholder. By default placeholder is set from placeholder-attribute, if it's absent placeholder is set as min-attribute.
 ```javascript
   new TypeNumberImitate('input.second', {wrapperClasses: 'green-border large'});
+```
+
+All options are available from *data-tni-ATTR* i.e:
+```html
+<input class="first" float="" min="1" type="text" data-tni-wrapper-classes='green-border large'>
 ```
 
 [Live demo](http://codepen.io/byzg/pen/VaNPMO)

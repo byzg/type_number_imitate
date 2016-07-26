@@ -1,7 +1,5 @@
 # created by byzg
 # https://github.com/byzg/type_number_imitate
-# created by byzg
-# https://github.com/byzg/type_number_imitate
 window.TypeNumberImitate = class TypeNumberImitate
   constructor: ($input, opts = {}) ->
     @$input = jQuery($input)
@@ -37,7 +35,7 @@ window.TypeNumberImitate = class TypeNumberImitate
 
   stepFn: (val)->
     oldVal = @$input.val()
-    oldVal = 0 if oldVal == ''
+    oldVal = @min - 1 if oldVal == ''
     oldVal = @parseFn(oldVal)
     newVal = oldVal + @parseFn(val)
     if @isValid(newVal)
@@ -64,10 +62,15 @@ window.TypeNumberImitate = class TypeNumberImitate
     @$input.data('type-number-imitated', true)
 
   initAttrs: ->
+    _.each @$input.data(), (v, k)=>
+      @opts[_.camelCase(k[3..-1])] = v if k[0..2] == 'tni'
     @float = @$input.is('[float]')
     @parseFn = if @float then parseFloat else parseInt
     @min = @parseFn(min) if min = @$input.attr('min')
     @max = @parseFn(max) if max = @$input.attr('max')
+    unless typeof(@opts.skipPlaceholder) == 'string'
+      @placeholer = @$input.attr('placeholder') || @min
+      @$input.attr('placeholder', @placeholer)
     @step = @parseFn(@$input.attr('step') || 1)
     regexStr = '^[0-9]+'
     regexStr += '\.?([0-9]+)?' if @float
