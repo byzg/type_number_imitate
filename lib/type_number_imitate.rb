@@ -1,5 +1,6 @@
 require "type_number_imitate/version"
 
 module TypeNumberImitate
-  # Your code goes here...
+  class Engine < ::Rails::Engine
+  end
 end
